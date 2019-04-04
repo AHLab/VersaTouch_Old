@@ -9,7 +9,7 @@ public class CalibPoint
     private int x;
     private int y;
     private double pressure;
-    private SoundPlayable soundFile;
+    private Piano soundFile;
     private String imgFile;
 
     public CalibPoint(int x, int y, double pressure)
@@ -19,7 +19,7 @@ public class CalibPoint
         this.pressure = pressure;
     }
 
-    public CalibPoint(int x, int y, SoundPlayable soundFile, String imgFile)
+    public CalibPoint(int x, int y, Piano soundFile, String imgFile)
     {
         this.x = x;
         this.y = y;
@@ -27,12 +27,12 @@ public class CalibPoint
         this.imgFile = imgFile;
     }
 
-    public SoundPlayable getSoundFile()
+    public Piano getSoundFile()
     {
         return soundFile;
     }
 
-    public void setSoundFile(SoundPlayable soundFile)
+    public void setSoundFile(Piano soundFile)
     {
         this.soundFile = soundFile;
     }

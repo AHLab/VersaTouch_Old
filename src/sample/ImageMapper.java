@@ -35,6 +35,8 @@ public class ImageMapper extends Application implements EventHandler<MouseEvent>
     private List<String> keyboardImages = new ArrayList<>();
     private List<SoundPlayable> fluteSounds = new ArrayList<>();
     private List<SoundPlayable> pianoSounds = new ArrayList<>();
+    private List<Piano> leftPiano = new ArrayList<>();
+    private List<Piano> rightPiano = new ArrayList<>();
     private List<CalibPoint> leftCalibPoints = new ArrayList<>();
     private List<CalibPoint> rightCalibPoints = new ArrayList<>();
 
@@ -112,23 +114,46 @@ public class ImageMapper extends Application implements EventHandler<MouseEvent>
         }
     }
 
-    private void setSoundFiles()
-    {
-        pianoSounds.add(new PianoSound(72, 60, selectedLeftChannel));
-        pianoSounds.add(new PianoSound(74, 62, selectedLeftChannel));
-        pianoSounds.add(new PianoSound(76, 64, selectedLeftChannel));
-        pianoSounds.add(new PianoSound(77, 65, selectedLeftChannel));
-        pianoSounds.add(new PianoSound(79, 67, selectedLeftChannel));
-        pianoSounds.add(new PianoSound(81, 69, selectedLeftChannel));
-        pianoSounds.add(new PianoSound(83, 71, selectedLeftChannel));
+//    private void setSoundFiles()
+//    {
+//        pianoSounds.add(new PianoSound(72, 60, selectedLeftChannel));
+//        pianoSounds.add(new PianoSound(74, 62, selectedLeftChannel));
+//        pianoSounds.add(new PianoSound(76, 64, selectedLeftChannel));
+//        pianoSounds.add(new PianoSound(77, 65, selectedLeftChannel));
+//        pianoSounds.add(new PianoSound(79, 67, selectedLeftChannel));
+//        pianoSounds.add(new PianoSound(81, 69, selectedLeftChannel));
+//        pianoSounds.add(new PianoSound(83, 71, selectedLeftChannel));
+//
+//        fluteSounds.add(new PianoSound(72, 60, selectedRightChannel));
+//        fluteSounds.add(new PianoSound(74, 62, selectedRightChannel));
+//        fluteSounds.add(new PianoSound(76, 64, selectedRightChannel));
+//        fluteSounds.add(new PianoSound(77, 65, selectedRightChannel));
+//        fluteSounds.add(new PianoSound(79, 67, selectedRightChannel));
+//        fluteSounds.add(new PianoSound(81, 69, selectedRightChannel));
+//        fluteSounds.add(new PianoSound(83, 71, selectedRightChannel));
+//
+//    }
 
-        fluteSounds.add(new PianoSound(72, 60, selectedRightChannel));
-        fluteSounds.add(new PianoSound(74, 62, selectedRightChannel));
-        fluteSounds.add(new PianoSound(76, 64, selectedRightChannel));
-        fluteSounds.add(new PianoSound(77, 65, selectedRightChannel));
-        fluteSounds.add(new PianoSound(79, 67, selectedRightChannel));
-        fluteSounds.add(new PianoSound(81, 69, selectedRightChannel));
-        fluteSounds.add(new PianoSound(83, 71, selectedRightChannel));
+    private void setLowSounds()
+    {
+        leftPiano.add(new Piano("/resources/39175__jobro__piano-ff-028.wav"));
+        leftPiano.add(new Piano("/resources/39177__jobro__piano-ff-030.wav"));
+        leftPiano.add(new Piano("/resources/39175__jobro__piano-ff-028.wav"));
+        leftPiano.add(new Piano("/resources/39180__jobro__piano-ff-033.wav"));
+        leftPiano.add(new Piano("/resources/39182__jobro__piano-ff-035.wav"));
+        leftPiano.add(new Piano("/resources/39184__jobro__piano-ff-037.wav"));
+        leftPiano.add(new Piano("/resources/39186__jobro__piano-ff-039.wav"));
+    }
+
+    private void setHighSounds()
+    {
+        rightPiano.add(new Piano("/resources/39187__jobro__piano-ff-040.wav"));
+        rightPiano.add(new Piano("/resources/39189__jobro__piano-ff-042.wav"));
+        rightPiano.add(new Piano("/resources/39191__jobro__piano-ff-044.wav"));
+        rightPiano.add(new Piano("/resources/39193__jobro__piano-ff-045.wav"));
+        rightPiano.add(new Piano("/resources/39195__jobro__piano-ff-047.wav"));
+        rightPiano.add(new Piano("/resources/39197__jobro__piano-ff-049.wav"));
+        rightPiano.add(new Piano("/resources/39199__jobro__piano-ff-051.wav"));
 
     }
 
@@ -138,7 +163,9 @@ public class ImageMapper extends Application implements EventHandler<MouseEvent>
         basePane = new Pane();
         setImgFiles();
         initMidiFiles();
-        setSoundFiles();
+//        setSoundFiles();
+        setLowSounds();
+        setHighSounds();
         setInitialScreen();
         Scene scene = new Scene(basePane, 1200, 900);
 
@@ -310,16 +337,18 @@ public class ImageMapper extends Application implements EventHandler<MouseEvent>
         }
     }
 
-    private SoundPlayable getNextSound(int i, int type, byte hand)
+    private Piano getNextSound(int i, int type, byte hand)
     {
         if( hand == left )
         {
-            return pianoSounds.get(i-1);
+//            return pianoSounds.get(i-1);
+            return leftPiano.get(i-1);
 
         }
         else
         {
-            return fluteSounds.get((i-1)%8);
+//            return fluteSounds.get((i-1)%8);
+            return rightPiano.get((i-1)%8);
         }
     }
 
@@ -340,7 +369,7 @@ public class ImageMapper extends Application implements EventHandler<MouseEvent>
         }
     }
 
-    private void setCalibrationValues( SoundPlayable soundFile, String imgFile, final byte hand )
+    private void setCalibrationValues( Piano soundFile, String imgFile, final byte hand )
     {
         requiredCount = 50;
         nextCalibBtn.setDisable(true);
@@ -479,7 +508,7 @@ public class ImageMapper extends Application implements EventHandler<MouseEvent>
 //                                {
 //                                    System.out.println("point: x - " + x + "    y - " + y );
 //                                    matchPoint.setPressure(newPoint.getPressure());
-//                                    updateLeftUI(matchPoint);
+//                                    updateUI(matchPoint);
 //                                }
 //
 //                                xValues.clear();
@@ -504,7 +533,7 @@ public class ImageMapper extends Application implements EventHandler<MouseEvent>
                                 leftTouch.setY(leftCoordinates[1]);
                                 newPoint.setSoundFile(matchPoint.getSoundFile());
                                 newPoint.setImgFile(matchPoint.getImgFile());
-                                updateLeftUI(newPoint);
+                                updateUI(newPoint);
                             }
 
                         }
@@ -533,7 +562,7 @@ public class ImageMapper extends Application implements EventHandler<MouseEvent>
                                 rightTouch.setY(rightCoordinates[1]);
                                 newPoint.setSoundFile(matchPoint.getSoundFile());
                                 newPoint.setImgFile(matchPoint.getImgFile());
-                                updateRightUI(newPoint);
+                                updateUI(newPoint);
                             }
 
                         }
@@ -549,56 +578,17 @@ public class ImageMapper extends Application implements EventHandler<MouseEvent>
         t.start();
     }
 
-    private void updateLeftUI(CalibPoint matchPoint)
+    private void updateUI(CalibPoint matchPoint)
     {
 //        calibrateImg.setImage(new Image(matchPoint.getImgFile()));
         if(matchPoint.isHighPressure())
         {
-            matchPoint.getSoundFile().playHighSound();
+            matchPoint.getSoundFile().play();
         }
         else
         {
-            matchPoint.getSoundFile().playLowSound();
+            matchPoint.getSoundFile().play();
         }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(400);
-//                    calibrateImg.setImage(new Image(keyboardImages.get(0)));
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-
-    private void updateRightUI(CalibPoint matchPoint)
-    {
-//        calibrateImg.setImage(new Image(matchPoint.getImgFile()));
-        if(matchPoint.isHighPressure())
-        {
-            matchPoint.getSoundFile().playHighSound();
-        }
-        else
-        {
-            matchPoint.getSoundFile().playLowSound();
-        }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(400);
-//                    calibrateImg.setImage(new Image(keyboardImages.get(0)));
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
     }
 
     private String getPosition(int count)

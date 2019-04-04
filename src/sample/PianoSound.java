@@ -18,6 +18,8 @@ public class PianoSound implements SoundPlayable
         this.midiChannel = midiChannel;
     }
 
+
+
     @Override
     public void playHighSound()
     {
@@ -25,7 +27,7 @@ public class PianoSound implements SoundPlayable
             @Override
             public void run() {
                 midiChannel.setMono(false);
-                midiChannel.noteOn(lowNote, 120);
+                midiChannel.noteOn(highNote, 120);
                 midiChannel.controlChange(7, 127);
                 try { Thread.sleep(500); // wait time in milliseconds to control duration
                 } catch( InterruptedException e ) { }
