@@ -99,11 +99,12 @@ public class ImageMapper extends Application implements EventHandler<MouseEvent>
             Instrument[] instr = midiSynth.getDefaultSoundbank().getInstruments();
             MidiChannel[] mChannels = midiSynth.getChannels();
 
-            midiSynth.loadInstrument(instr[0]);
-            selectedLeftChannel = mChannels[0];
 
             midiSynth.loadInstrument(instr[73]);
             selectedRightChannel = mChannels[1];
+
+            midiSynth.loadInstrument(instr[0]);
+            selectedLeftChannel = mChannels[0];
         }
         catch( Exception e )
         {
@@ -318,7 +319,7 @@ public class ImageMapper extends Application implements EventHandler<MouseEvent>
         }
         else
         {
-            return fluteSounds.get(i-1);
+            return fluteSounds.get((i-1)%8);
         }
     }
 

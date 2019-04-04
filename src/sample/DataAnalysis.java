@@ -1,5 +1,7 @@
 package sample;
 
+import jdk.nashorn.internal.runtime.ECMAException;
+
 /**
  * Created by Shi Yilei
  */
@@ -211,10 +213,15 @@ public class DataAnalysis
     /*** Calculate the signal strength ***/
     public int signal_strenth(int[][] data, int[] peak)
     {
-        int power1 = data[0][peak[0]+140] - data[0][peak[0]];
-        int power2 = data[1][peak[1]+140] - data[1][peak[1]];
-        int power3 = data[2][peak[2]+140] - data[2][peak[2]];
-        int power = (power1 + power2 + power3) / 3;
+        int power1 = 0, power2 = 0, power3 =0, power = 0;
+        try {
+            power1 = data[0][peak[0] + 140] - data[0][peak[0]];
+            power2 = data[1][peak[1] + 140] - data[1][peak[1]];
+            power3 = data[2][peak[2] + 140] - data[2][peak[2]];
+            power = (power1 + power2 + power3) / 3;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return power;
     }
 
