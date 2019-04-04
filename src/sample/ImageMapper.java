@@ -136,24 +136,24 @@ public class ImageMapper extends Application implements EventHandler<MouseEvent>
 
     private void setLowSounds()
     {
-        leftPiano.add(new Piano("/resources/39175__jobro__piano-ff-028.wav"));
-        leftPiano.add(new Piano("/resources/39177__jobro__piano-ff-030.wav"));
-        leftPiano.add(new Piano("/resources/39175__jobro__piano-ff-028.wav"));
-        leftPiano.add(new Piano("/resources/39180__jobro__piano-ff-033.wav"));
-        leftPiano.add(new Piano("/resources/39182__jobro__piano-ff-035.wav"));
-        leftPiano.add(new Piano("/resources/39184__jobro__piano-ff-037.wav"));
-        leftPiano.add(new Piano("/resources/39186__jobro__piano-ff-039.wav"));
+        leftPiano.add(new Piano("./src/resources/39175__jobro__piano-ff-028.wav"));
+        leftPiano.add(new Piano("./src/resources/39177__jobro__piano-ff-030.wav"));
+        leftPiano.add(new Piano("./src/resources/39175__jobro__piano-ff-028.wav"));
+        leftPiano.add(new Piano("./src/resources/39180__jobro__piano-ff-033.wav"));
+        leftPiano.add(new Piano("./src/resources/39182__jobro__piano-ff-035.wav"));
+        leftPiano.add(new Piano("./src/resources/39184__jobro__piano-ff-037.wav"));
+        leftPiano.add(new Piano("./src/resources/39186__jobro__piano-ff-039.wav"));
     }
 
     private void setHighSounds()
     {
-        rightPiano.add(new Piano("/resources/39187__jobro__piano-ff-040.wav"));
-        rightPiano.add(new Piano("/resources/39189__jobro__piano-ff-042.wav"));
-        rightPiano.add(new Piano("/resources/39191__jobro__piano-ff-044.wav"));
-        rightPiano.add(new Piano("/resources/39193__jobro__piano-ff-045.wav"));
-        rightPiano.add(new Piano("/resources/39195__jobro__piano-ff-047.wav"));
-        rightPiano.add(new Piano("/resources/39197__jobro__piano-ff-049.wav"));
-        rightPiano.add(new Piano("/resources/39199__jobro__piano-ff-051.wav"));
+        rightPiano.add(new Piano("./src/resources/39187__jobro__piano-ff-040.wav"));
+        rightPiano.add(new Piano("./src/resources/39189__jobro__piano-ff-042.wav"));
+        rightPiano.add(new Piano("./src/resources/39191__jobro__piano-ff-044.wav"));
+        rightPiano.add(new Piano("./src/resources/39193__jobro__piano-ff-045.wav"));
+        rightPiano.add(new Piano("./src/resources/39195__jobro__piano-ff-047.wav"));
+        rightPiano.add(new Piano("./src/resources/39197__jobro__piano-ff-049.wav"));
+        rightPiano.add(new Piano("./src/resources/39199__jobro__piano-ff-051.wav"));
 
     }
 
@@ -583,11 +583,11 @@ public class ImageMapper extends Application implements EventHandler<MouseEvent>
 //        calibrateImg.setImage(new Image(matchPoint.getImgFile()));
         if(matchPoint.isHighPressure())
         {
-            matchPoint.getSoundFile().play();
+            matchPoint.getSoundFile().playHigh();
         }
         else
         {
-            matchPoint.getSoundFile().play();
+            matchPoint.getSoundFile().playLow();
         }
     }
 
